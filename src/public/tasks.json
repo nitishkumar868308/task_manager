@@ -1,5 +1,0 @@
-[
-  { "id": 1, "title": "Finish assignment", "completed": false },
-  { "id": 2, "title": "Read React docs", "completed": true },
-  { "id": 3, "title": "Call client", "completed": false }
-]

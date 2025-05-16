@@ -5,29 +5,37 @@ import { useStore } from '@/store/useStore';
 
 export default function AddTaskModal() {
   const [title, setTitle] = useState('');
-  const addTask = useStore(state => state.addTask);
+  const { tasks, addTask } = useStore();
 
   const handleAdd = () => {
     if (!title.trim()) return;
-    addTask({ id: Date.now(), title, completed: false });
+
+    const nextId = tasks.length > 0
+      ? Math.max(...tasks.map((task) => task.id)) + 1
+      : 1;
+
+    addTask({ id: nextId, title, completed: false });
     setTitle('');
   };
 
+
   return (
-    <div className="mb-6 flex gap-4">
-      <input
-        type="text"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-        placeholder="New task"
-        className="border px-4 py-2 rounded w-full max-w-md"
-      />
-      <button
-        onClick={handleAdd}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
-      >
-        Add Task
-      </button>
-    </div>
+   <div className="mb-6 flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+  <input
+    type="text"
+    value={title}
+    onChange={e => setTitle(e.target.value)}
+    placeholder="Add a new task..."
+    className="flex-grow rounded-lg border border-gray-300 px-4 py-3 text-gray-700 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+  />
+  <button
+    onClick={handleAdd}
+    className="w-full cursor-pointer sm:w-auto rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold px-6 py-3 shadow-md hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-400 transition"
+  >
+    Add Task
+  </button>
+</div>
+
+
   );
 }
