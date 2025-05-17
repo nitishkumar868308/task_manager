@@ -13,7 +13,6 @@ export default function ProtectedRoute({ children }: Props) {
     const router = useRouter();
 
     useEffect(() => {
-        // Redirect to login if no session exists and status is not loading
         if (!session && status !== 'loading') {
             router.push('/login');
         }

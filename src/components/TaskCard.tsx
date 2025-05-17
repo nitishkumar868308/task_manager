@@ -9,20 +9,20 @@ export default function TaskCard({ task }: { task: Task }) {
   const deleteTask = useStore(state => state.deleteTask);
 
   const btnClass =
-    "w-28 py-2 rounded-md text-white text-sm cursor-pointer font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1";
+    "w-full sm:w-auto py-2 px-3 rounded-md text-white text-sm cursor-pointer font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1";
 
   return (
-    <div className="flex justify-between items-center bg-white p-5 shadow-md rounded-lg border border-gray-200">
-      <div className="max-w-xs">
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center bg-white p-4 sm:p-5 shadow-md rounded-lg border border-gray-200 gap-4">
+      <div className="w-full sm:w-auto">
         <h2
-          className={`text-lg font-semibold truncate ${task.completed ? 'line-through text-gray-400' : 'text-gray-900'
-            }`}
+          className={`text-base sm:text-lg font-semibold truncate ${task.completed ? 'line-through text-gray-400' : 'text-gray-900'}`}
           title={task.title}
         >
           {task.title}
         </h2>
       </div>
-      <div className="flex gap-3 items-center">
+
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
         <Link
           href={`/dashboard/tasks/${task.id}`}
           className={`${btnClass} bg-blue-600 hover:bg-blue-700 focus:ring-blue-400 text-center`}
